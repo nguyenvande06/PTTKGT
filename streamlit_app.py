@@ -106,7 +106,8 @@ default_edges_text = """
 1 5
 4 5
 5 6
-
+7 # Đỉnh cô lập
+"""
 # ------------------------------
 # HÀM VẼ CHUNG (Đã tích hợp st.status)
 # ------------------------------
@@ -449,7 +450,7 @@ if st.session_state.G and len(st.session_state.G.nodes()) > 0:
         st.session_state.pos,
         st.session_state.nodes_list,
         st.session_state.color_assign,
-        title="",
+        title="Đồ thị đã tải (Chưa tô màu)",
         delay=0.0
     )
 else:
@@ -472,7 +473,6 @@ if st.session_state.get('run_algo', False):
     else:
         st.error("Không thể chạy thuật toán vì đồ thị rỗng hoặc không hợp lệ.")
     st.session_state.run_algo = False
-    st.rerun()
 # ------------------------------
 # THÔNG TIN THÊM VÀ KẾT QUẢ
 # ------------------------------
