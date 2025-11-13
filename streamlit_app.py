@@ -106,6 +106,7 @@ default_edges_text = """
 1 5
 4 5
 5 6
+7 # Đỉnh cô lập
 """
 # ------------------------------
 # HÀM VẼ CHUNG (Đã tích hợp st.status)
