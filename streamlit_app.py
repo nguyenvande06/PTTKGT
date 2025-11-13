@@ -137,7 +137,7 @@ def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title
     ax.set_title(title, fontsize=13)
     ax.axis('off')
     # Hiển thị đồ thị
-    st.session_state.fig_placeholder.pyplot(fig)
+    st.session_state.fig_placeholder.pyplot(fig, use_container_width=False)
     plt.close(fig)
    
     # Cập nhật trạng thái trong st.status (nếu có)
