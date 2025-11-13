@@ -183,7 +183,7 @@ def find_min_colors(algorithm_func, G, pos, nodes_list, color_assign_ref, initia
                 draw_graph_step(G, pos, nodes_list, color_assign_ref,
                                 title=f"Thử {k} màu thất bại — chuyển sang {k + 1} màu...", delay=delay_time, status_context=status)
         if found_k is not None:
-            final_title = f"✅ Tìm được số màu tối ưu: {found_k} | T.gian thuật toán: {total_algo_time:.3f}s"
+            final_title = f"Tìm được số màu tối ưu: {found_k} | T.gian thuật toán: {total_algo_time:.3f}s"
             status.update(label=final_title, state="complete", expanded=False)
             draw_graph_step(G, pos, nodes_list, color_assign_ref, title=final_title.replace("|", "\n"), delay=0.0)
             st.sidebar.info(f"Số màu tối ưu (χ(G)): **{found_k}**")
