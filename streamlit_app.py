@@ -106,13 +106,12 @@ default_edges_text = """
 1 5
 4 5
 5 6
-7 # Đỉnh cô lập
+
 """
 # ------------------------------
 # HÀM VẼ CHUNG (Đã tích hợp st.status)
 # ------------------------------
 def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title="", delay=0.0, status_context=None):
-    algo_pause_timer_for_draw()  # Pause timer before any drawing or rendering
     fig, ax = plt.subplots()
    
     current_colors = st.session_state.available_colors
@@ -144,9 +143,11 @@ def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title
     # Cập nhật trạng thái trong st.status (nếu có)
     if status_context:
         status_context.update(label=title, state="running", expanded=True)
+    # Tạm dừng timer trước animation
+    algo_pause_timer_for_draw()
     if delay > 0:
         busy_sleep(delay)
-    algo_resume_timer_after_draw()  # Resume after drawing, rendering, and delay
+    algo_resume_timer_after_draw()
 # ------------------------------
 # FIND_MIN COLORS (Đã tích hợp st.status)
 # ------------------------------
