@@ -9,7 +9,7 @@ import os
 # CẤU HÌNH BAN ĐẦU / HÀM HỖ TRỢ
 # ------------------------------
 # Cài đặt Matplotlib
-plt.rcParams['figure.figsize'] = [5,4]
+plt.rcParams['figure.figsize'] = [4,3]
 # Màu mặc định
 available_colors_list = ["red", "green", "blue", "yellow", "brown", "pink", "orange", "purple", "cyan", "gray"]
 MAX_DEFAULT_COLORS = len(available_colors_list)
