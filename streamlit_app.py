@@ -9,7 +9,7 @@ import os
 # CẤU HÌNH BAN ĐẦU / HÀM HỖ TRỢ
 # ------------------------------
 # Cài đặt Matplotlib
-plt.rcParams['figure.figsize'] = [4, 3]
+plt.rcParams['figure.figsize'] = [5, 4]
 # Màu mặc định
 available_colors_list = ["red", "green", "blue", "yellow", "brown", "pink", "orange", "purple", "cyan", "gray"]
 MAX_DEFAULT_COLORS = len(available_colors_list)
@@ -111,6 +111,7 @@ default_edges_text = """
 # HÀM VẼ CHUNG (Đã tích hợp st.status)
 # ------------------------------
 def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title="", delay=0.0, status_context=None):
+    algo_pause_timer_for_draw()  # Pause trước khi tạo fig và render
     fig, ax = plt.subplots()
    
     current_colors = st.session_state.available_colors
@@ -142,11 +143,9 @@ def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title
     # Cập nhật trạng thái trong st.status (nếu có)
     if status_context:
         status_context.update(label=title, state="running", expanded=True)
-    # Tạm dừng timer trước animation
-    algo_pause_timer_for_draw()
     if delay > 0:
         busy_sleep(delay)
-    algo_resume_timer_after_draw()
+    algo_resume_timer_after_draw()  # Resume sau toàn bộ draw và sleep
 # ------------------------------
 # FIND_MIN COLORS (Đã tích hợp st.status)
 # ------------------------------
