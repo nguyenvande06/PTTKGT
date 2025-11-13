@@ -387,6 +387,11 @@ if 'G' not in st.session_state or 'edges_text' not in st.session_state:
     edges = parse_input_edges(default_edges_text)
     st.session_state.G, st.session_state.pos, st.session_state.nodes_list, st.session_state.color_assign = build_graph_from_edges(edges)
     st.session_state.available_colors = list(available_colors_list)
+# Hàm reset khi thay đổi thuật toán
+def reset_on_algo_change():
+    if 'nodes_list' in st.session_state:
+        st.session_state.color_assign = {n: -1 for n in st.session_state.nodes_list}
+        st.session_state.available_colors = list(available_colors_list)
 # ------------------------------
 # SIDEBAR: Cấu hình đồ thị và thuật toán
 # ------------------------------
@@ -415,7 +420,8 @@ with st.sidebar:
    
     algorithm_choice = st.selectbox(
         "Chọn Thuật toán",
-        ("Backtracking", "Greedy", "DSatur")
+        ("Backtracking", "Greedy", "DSatur"),
+        on_change=reset_on_algo_change
     )
    
     color_mode = st.radio(
