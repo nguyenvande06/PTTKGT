@@ -220,13 +220,21 @@ def run_algorithm(G, pos, nodes_list, color_assign_ref, algorithm_choice, color_
                     break
            
             if is_safe(node, color_idx):
+               # 1️⃣ Hiệu ứng vòng đỏ trước khi tô màu
+                draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node,
+                    title=f"[BT] Đang xét đỉnh {node} với màu {st.session_state.available_colors[color_idx]}",
+                    delay=delay_time, status_context=status_context)
+
+               # 2️⃣ Gán màu và hiển thị lại (vòng đỏ + tô bên trong)
                 color_assign_ref[node] = color_idx
                 cname = st.session_state.available_colors[color_idx]
                 draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node,
-                                title=f"[BT] Tô đỉnh {node} = {cname}", delay=delay_time, status_context=status_context)
-               
+                    title=f"[BT] Tô đỉnh {node} = {cname}", delay=delay_time, status_context=status_context)
+
+               # 3️⃣ Đệ quy
                 if backtrack_color(idx + 1, max_colors, allow_expand, status_context):
-                    return True
+                   return True
+
                
                 color_assign_ref[node] = -1
                 draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node,
