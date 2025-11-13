@@ -9,7 +9,7 @@ import os
 # CẤU HÌNH BAN ĐẦU / HÀM HỖ TRỢ
 # ------------------------------
 # Cài đặt Matplotlib
-plt.rcParams['figure.figsize'] = [4,3]
+plt.rcParams['figure.figsize'] = [5, 4]
 # Màu mặc định
 available_colors_list = ["red", "green", "blue", "yellow", "brown", "pink", "orange", "purple", "cyan", "gray"]
 MAX_DEFAULT_COLORS = len(available_colors_list)
@@ -126,15 +126,15 @@ def draw_graph_step(G, pos, nodes_list, color_assign, highlight_node=None, title
         G, pos,
         nodelist=nodes_list,
         node_color=node_colors,
-        node_size=800,
+        node_size=600,
         edgecolors=edgecolors,
         linewidths=linewidths,
         ax=ax
     )
     nx.draw_networkx_labels(G, pos, labels={n: str(n) for n in nodes_list},
-                            font_size=12, font_weight="bold", font_color="white", ax=ax)
+                            font_size=10, font_weight="bold", font_color="white", ax=ax)
     nx.draw_networkx_edges(G, pos, ax=ax)
-    ax.set_title(title, fontsize=13)
+    ax.set_title(title, fontsize=10)
     ax.axis('off')
     # Hiển thị đồ thị
     st.session_state.fig_placeholder.pyplot(fig, use_container_width=False)
@@ -241,7 +241,10 @@ def run_algorithm(G, pos, nodes_list, color_assign_ref, algorithm_choice, color_
         ok = backtrack_color(0, max_colors, allow_expand, status_context)
         elapsed_algo = algo_stop_timer()
         if show_time:
-            final_title = f"Hoàn tất tô màu (Backtracking) ({'Thành công' if ok else 'Thất bại'})\n T.gian: {elapsed_algo:.3f}s"
+            if ok:
+                final_title = f"Tô hoàn tất\n T.gian: {elapsed_algo:.3f}s"
+            else:
+                final_title = f"Tô không thành công\n T.gian: {elapsed_algo:.3f}s"
             if status_context: status_context.write(final_title)
             draw_graph_step(G, pos, nodes_list, color_assign_ref, title=final_title.replace("\n", "\n"), delay=0.0, status_context=status_context)
         return ok, elapsed_algo
@@ -274,12 +277,12 @@ def run_algorithm(G, pos, nodes_list, color_assign_ref, algorithm_choice, color_
                 draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node, title=f"[G] Tô đỉnh {node} = {cname}", delay=delay_time, status_context=status_context)
             else:
                 elapsed_algo = algo_stop_timer()
-                final_title = f"Không thể tô hợp lệ (Greedy)\n T.gian: {elapsed_algo:.3f}s"
+                final_title = f"Tô không thành công\n T.gian: {elapsed_algo:.3f}s"
                 if status_context: status_context.write(final_title)
                 draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node, title=final_title.replace("\n", "\n"), delay=0.0, status_context=status_context)
                 return False, elapsed_algo
         elapsed_algo = algo_stop_timer()
-        final_title = f"Hoàn tất tô màu (Greedy)\n T.gian: {elapsed_algo:.3f}s"
+        final_title = f"Tô hoàn tất\n T.gian: {elapsed_algo:.3f}s"
         if status_context: status_context.write(final_title)
         draw_graph_step(G, pos, nodes_list, color_assign_ref, title=final_title.replace("\n", "\n"), delay=0.0, status_context=status_context)
         return True, elapsed_algo
@@ -329,13 +332,13 @@ def run_algorithm(G, pos, nodes_list, color_assign_ref, algorithm_choice, color_
                                 title=f"[DSATUR] Tô đỉnh {node} = {cname}", delay=delay_time, status_context=status_context)
             else:
                 elapsed_algo = algo_stop_timer()
-                final_title = f"Không thể tô hợp lệ (DSATUR)\n T.gian: {elapsed_algo:.3f}s"
+                final_title = f"Tô không thành công\n T.gian: {elapsed_algo:.3f}s"
                 if status_context: status_context.write(final_title)
                 draw_graph_step(G, pos, nodes_list, color_assign_ref, highlight_node=node, title=final_title.replace("\n", "\n"), delay=0.0, status_context=status_context)
                 return False, elapsed_algo
             uncolored.remove(node)
         elapsed_algo = algo_stop_timer()
-        final_title = f"Hoàn tất tô màu (DSATUR)\n T.gian: {elapsed_algo:.3f}s"
+        final_title = f"Tô hoàn tất\n T.gian: {elapsed_algo:.3f}s"
         if status_context: status_context.write(final_title)
         draw_graph_step(G, pos, nodes_list, color_assign_ref, title=final_title.replace("\n", "\n"), delay=0.0, status_context=status_context)
         return True, elapsed_algo
