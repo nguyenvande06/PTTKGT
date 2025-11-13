@@ -96,7 +96,7 @@ def parse_input_edges(input_text):
 # ------------------------------
 # KHỞI TẠO MẶC ĐỊNH
 # ------------------------------
-default_edges_text = """
+default_edges_text = "
 1 2
 1 3
 3 4
@@ -106,7 +106,7 @@ default_edges_text = """
 1 5
 4 5
 5 6
-
+"
 # ------------------------------
 # HÀM VẼ CHUNG (Đã tích hợp st.status)
 # ------------------------------
